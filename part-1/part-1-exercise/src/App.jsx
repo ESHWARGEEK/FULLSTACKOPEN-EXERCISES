@@ -50,12 +50,14 @@ const App = () => {
       <Buttons onClick={handleNeutral} text={"neutral"} />
       <Buttons onClick={handleBad} text={"bad"} />
       <Header header={"statistics"} />
-      <Result name={"good"} score={good} />
-      <Result name={"neutral"} score={neutral} />
-      <Result name={"bad"} score={bad} />
-      <Statistics name={"all"} data={good + bad + neutral} />
-      <Statistics name={"average"} data={average(good, bad, neutral)} />
-      <Statistics name={"positive"} data={percentage(good, bad, neutral)} />
+      <Statistics
+        good={good}
+        total={total(good, bad, neutral)}
+        average={average(good, bad, neutral)}
+        percentage={percentage(good, bad, neutral)}
+        bad={bad}
+        neutral={neutral}
+      />
     </div>
   );
 };
