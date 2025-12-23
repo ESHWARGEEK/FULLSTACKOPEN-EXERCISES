@@ -29,6 +29,19 @@ const App = () => {
     setNeutral(neutralNow);
   };
 
+  const total = (good, bad, neutral) => {
+    return good + bad + neutral;
+  };
+
+  const average = (good, bad, neutral) => {
+    const total_value = total(good, bad, neutral);
+    return (good - bad) / total_value;
+  };
+
+  const percentage = (good, bad, neutral) => {
+    return (good / total(good, bad, neutral)) * 100 + " %";
+  };
+
   return (
     <div>
       <Header header={"give feedback"} />
@@ -39,6 +52,9 @@ const App = () => {
       <Result name={"good"} score={good} />
       <Result name={"neutral"} score={neutral} />
       <Result name={"bad"} score={bad} />
+      <Result name={"all"} score={total(good, bad, neutral)} />
+      <Result name={"average"} score={average(good, bad, neutral)} />
+      <Result name={"positive"} score={percentage(good, bad, neutral)} />
     </div>
   );
 };
