@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Buttons from "./components/Buttons";
 import Result from "./components/Result";
+import Statistics from "./components/Statistics";
 
 const App = () => {
   const [good, setGood] = useState(0);
@@ -52,9 +53,9 @@ const App = () => {
       <Result name={"good"} score={good} />
       <Result name={"neutral"} score={neutral} />
       <Result name={"bad"} score={bad} />
-      <Result name={"all"} score={total(good, bad, neutral)} />
-      <Result name={"average"} score={average(good, bad, neutral)} />
-      <Result name={"positive"} score={percentage(good, bad, neutral)} />
+      <Statistics name={"all"} data={good + bad + neutral} />
+      <Statistics name={"average"} data={average(good, bad, neutral)} />
+      <Statistics name={"positive"} data={percentage(good, bad, neutral)} />
     </div>
   );
 };
