@@ -1,6 +1,8 @@
 import { useState } from "react";
+import MostVote from "./components/MostVote";
 
 const App = () => {
+  const votes = [0, 0, 0, 0, 0, 0, 0, 0];
   const anecdotes = [
     "If it hurts, do it more often.",
     "Adding manpower to a late software project makes it later!",
@@ -13,17 +15,34 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [vote, setVote] = useState(votes);
+  const [mostVoted, setMostVoted] = useState(0);
 
   const getRandomAnecdote = () => {
     const randomeAnecodote = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomeAnecodote);
   };
 
+  const handleVote = () => {
+    const newVote = [...vote];
+    newVote[selected] += 1;
+    setVote(newVote);
+
+    if (newVote[selected] > newVote[mostVoted]) {
+      setMostVoted(selected);
+    }
+  };
+
   return (
     <div>
       {anecdotes[selected]}
       <br />
+      <p>has {vote[selected]} votes</p>
+      <br />
+      <button onClick={handleVote}>Vote</button>
       <button onClick={getRandomAnecdote}>next anecdote</button>
+      <br />
+      <MostVote anecdote={anecdotes[mostVoted]} votes={vote[mostVoted]} />
     </div>
   );
 };
